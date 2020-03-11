@@ -34,7 +34,7 @@ The data to be processed is all text, so a variety of NLP techniques were used t
 
 The large majority of data processing and preprocessing was done with [spaCy](https://spacy.io/). According to the documentation, [spaCy](https://spacy.io/usage/spacy-101) is a “free, open-source library for advanced Natural Language Processing (NLP) in Python.” What this means is, when you import spaCy, you have access to various functionalities built on complex models and cutting edge research that help us process text data to build implement our own programs built on text data. Below is a general overview of spaCy’s architecture, taken from the [spaCy documentation](https://spacy.io/api):
 
-![](./assets/pacy_architecture.png)
+![](./assets/spacy_architecture.png)
 
 Some of the main functionalities offered by spaCy are: Tokenization, Part-of-speech (POS) Tagging, Named Entity Recognition (NER), and [more](https://spacy.io/usage/spacy-101). SpaCy also provides pre-trained statistical models for users to use to preprocess their own text data. For the purposes of this project, I used the...
 
