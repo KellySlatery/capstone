@@ -7,6 +7,41 @@ Kelly Slatery | US-DSI-10 | 03.13.2020
 Musical fans come in all shapes and sizes and levels of intensity, but the one thing we all have in common is: we love musicals. But no matter how much of a Broadway buff you are, none of us knows ALL the popular musicals’ soundtracks word-for-word. And sometimes you just can’t match Rent’s “One Song Glory” energy. Sometimes, all we want is for someone (or something) to tell us what musical to listen to in the moment. That’s where ShowMeTunes (???) comes in: you input a short description of your current state (mood, what’s going on in your head and in your life), and ShowMeTunes will show you the show tunes you should give a listen to right when you need it. Now, you’ll never have to go another minute wondering, “ What musicals am I missing out on?” or simply, “What should I play next?”
 
 
+## Project Directory
+```
+project-2
+|__ code
+|   |__ 01_Musicals_Collection.ipynb
+|   |__ 02_Synopsis_Collection.ipynb
+|   |__ 03_Summary_Collection.ipynb
+|   |__ 04_Data_Concatenation.ipynb
+|   |__ 05_EDA_and_Cleaning.ipynb
+|   |__ 06_Sentiment_Analysis.ipynb
+|   |__ 07_Recommender_System.ipynb
+|   |__ 08_Model_Evaluation.ipynb   
+|__ assets
+|   |__ spacy_architecture.png
+|__ data
+|   |__ musical_names.csv
+|   |__ musical_synopses.csv
+|   |__ musical_summaries.csv
+|   |__ musical_data.csv
+|   |__ musical_vectors.csv
+|   |__ dbscan_labels.csv
+|   |__ kmeans_labels.csv
+|   |__ musical_data_vectors_labels.csv
+|   |__ musical_sentiments.csv
+|   |__ musical_for_app.csv
+|__ templates
+|   |__ form.html
+|   |__ results.html
+|   |__ css
+|   |__ |__ custom.css
+|__ Coming Soon: presentation.pdf
+|__ README.md
+```
+
+
 ## Data Collection
 
 The data for the alpha version of this project was pulled from 3 sources:
@@ -40,4 +75,3 @@ Some of the main functionalities offered by spaCy are: Tokenization, Part-of-spe
 
 
 # TO BE CONTINUED TODAY!
-
