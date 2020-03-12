@@ -7,14 +7,15 @@
 	<title>ShowMeTunes</title>
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" type="text/css" href="./css/custom.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
 </head>
 <body>
 	<form action="/submit">
 		<p>
-			<label for="UserInput">In 3-5 sentences...How are you feeling today? What's going on with you?</label><br>
+			<h1><label for="UserInput">In 3-5 sentences...How are you feeling today? What's going on with you?</label></h1><br>
+      <textarea rows="5" cols="80" id="TITLE"></textarea>
 			<input type="string" name="UserInput">
-      <input type="submit">
+      <input class="sumissionfield" type="submit">
 		</p>
 	</form>
 </body>
