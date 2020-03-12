@@ -1,45 +1,126 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Saira Extra Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #343a40;
-}
-
-html {
-  box-sizing: border-box;
-  /* -ms-overflow-style: scrollbar; */
-}
-
 body {
   font-family: 'Muli', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  padding-top: 54px;
   color: #868e96;
-  max-width: 500px;
   margin: auto;
+  /* max-width: 800px; */
   text-align: center;
-  background-color: pink;
+  background-color: #E7AEA8;
 }
 
-textarea {
+/* Credits (code): https://www.w3schools.com/cssref/tryit.asp?filename=trycss3_background_hero */
+/* Credits (image): https://www.theodysseyonline.com/10-movie-musical-musts-for-rainy-day-boost?ref=pn */
+.header-img {
+  padding-bottom: 10px;
+  background-image: url("https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vbWVkaWEucmJsLm1zL2ltYWdlP3U9JTJGZmlsZXMlMkYyMDE2JTJGMDclMkYwOSUyRjYzNjAzNjQzMDA3MjU2MTc4NS0xNzg4MzE5MTc0X011c2ljYWxzLmpwZyZobz1odHRwcyUzQSUyRiUyRmF6NjE2NTc4LnZvLm1zZWNuZC5uZXQmcz0zNDImaD01MDg3MDJjNjcyZTkyODIzODY0NDZmOThkZmRmNTUxNTM1YTEyZDdkYTdhNmIxNmMzOWVlNDRiNzlmYTBjYmZiJnNpemU9OTgweCZjPTE5NDI3MTY5MTkiLCJleHBpcmVzX2F0IjoxNjEyOTI0NTQzfQ.wmy1uTthgNA8a5MJuE0eho2BjMBmsvbNL-3YEC9f8FU/img.jpg");
+  height: 200px;
+  background-size: contain;
+  position: relative;
+}
+
+h1 {
+  color: #ED5F4F !important;
+  background: rgba(0, 0, 0, 0.5);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.header-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36pt;
+}
+
+.header-text-2 {
+  text-align: center;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  font-size: 20pt;
+  color: lightgray !important;
+  background: rgba(0, 0, 0, 0.5);
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.introduction {
+  background-color: rgba(250, 255, 255, .6);
+  background-position: center;
+  width: 810px;
+  margin: 0 auto;
+  padding: 30px;
+  margin-top: 30px;
   font-size: 14pt;
 }
 
-form input{
-    font-size: 2em;
+h3 {
+  background-color: rgba(250, 255, 255, .6);
+  background-position: center;
+  width: 325px;
+  margin: 0 auto;
+  padding: 50px;
+  font-size: 28pt;
 }
 
-input.submissionfield {
-  width: 90px;
-  height: 390px;
-  border: 1px solid #999999;
-  padding: 5px;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Saira Extra Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-weight: 700;
+  color: #343a40;
 }
 
- .content {
+body form h1 {
+  font-size: 20px;
+}
 
+.header {
+  text-transform: uppercase;
+  font-size: 24pt;
+}
+
+.input-description {
+  text-align: left;
+  color: black;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Credits: https://codepen.io/LeoPragi/pen/gzrGoG */
+input {
+  background-color: lightgray;
+  font-size: 14pt;
+  color: #556677;
+  padding: 20px 20px;
+  margin: 10px 2px;
+  cursor: pointer;
+  shape-outside: padding-box;
+  border-image: initial;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+input:hover {
+  background-color: darkgray;
+  border-color: rgb(150, 150, 150) rgb(125, 125, 125) rgb(110, 110, 110);
+  color: white;
+}
+
+/* Credits: https://codepen.io/vsync/pen/czgrf */
+textarea {
+  font-size: 12pt;
+  height: 200px;
+  resize: none;
+  overflow:hidden;
+  width:500px;
+  font-size:14px;
+  margin: auto;
+  margin-top: 3px;
+  margin-bottom: 15px;
+  display:block;
+  border:3px solid #556677;
 }

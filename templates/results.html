@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-16">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 	<title>Recommendations!</title>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
 </head>
 <body>
-<h2> You should listen to 1. {{rec1}} 2. {{rec2}} 3. {{rec3}}<h2>
-  <br>
-  <h3>Happy listening! :-)</h3>
+	<div class="header-img">
+    <div class="header-text"><h1>ShowMeTunes</h1></div>
+    <div class="header-text-2">Kelly Slatery</div>
+  </div>
+	<h2 class="header"> You should listen to:<h2>
+	<h3>1. {{rec1}} <br><br> 2. {{rec2}} <br><br> 3. {{rec3}}</h3>
+  <h2>Happy listening! :-)</h3>
 </body>
 </html>
