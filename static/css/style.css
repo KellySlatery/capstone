@@ -17,11 +17,16 @@ body {
   position: relative;
 }
 
+.header-overlay {
+  padding-bottom: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  height: 200px;
+  background-size: contain;
+  position: relative;
+}
+
 h1 {
   color: #ED5F4F !important;
-  background: rgba(0, 0, 0, 0.5);
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 .header-text {
@@ -41,9 +46,6 @@ h1 {
   transform: translate(-50%, -100%);
   font-size: 20pt;
   color: lightgray !important;
-  background: rgba(0, 0, 0, 0.5);
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .introduction {
