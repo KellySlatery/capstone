@@ -122,7 +122,7 @@ Document similarity describes the method used to compute how similar a user’s 
 
 But how is similarity between vectors computed? In spaCy, it’s a simple as typing doc1.similarity(doc2), and surprisingly, the underlying formula isn’t much more complicated. The function being computed is called “cosine similarity” and it essentially measures the distance between two vectors in a multi-dimensional space, outputting a value between [0,1] with a higher score representing more similarity. What the function computes is the dot product of the two vectors divided by the multiplication of the normalized vectors (using the vector’s L2 norm, which is the the square root of the sum of the vector values squared, as described [here](https://spacy.io/usage/vectors-similarity#basics). For more detail, check out the [spaCy source code](https://github.com/explosion/spaCy/blob/master/spacy/tests/util.py) for cosine similarity below:
 
-![](./assets/spacy_acosine_similarity.png)
+![](./assets/spacy_cosine_similarity.png)
 
 Once document similarities were computed between user input and each musical summary, they were made into a pandas DataFrame and sorted by similarity score. Then, the 10 highest-scoring musicals were passed through to get their sentiment analysis scores.
 
