@@ -50,6 +50,14 @@ project-2
 ```
 
 
+## Executive Summary
+First, I collected the Ranker.com list of the 196 most popular user-ranked musicals using Selenium and BeautifulSoup. Then, using the Requests library and the Wikipedia API, I collected the synopses for each musical from Wikipedia and All Musicals. Using the NLP library, spaCy, and regular expressions, I processed and vectorized the musical synopses. Using TextBlob, I then computed a sentiment rating for each musical synopsis.
+
+Through the Flask application, a user inputs a short description of their mood, answering the questions, “How are you feeling? What’s going on with you?”. Then, using spaCy, the cosine similarity between user input and each musical synopses is computed, and similarities are ranked. Of the top ten, they are ranked by magnitude of difference in sentiment ranking, and then the user is given the top three musicals from that list.
+
+The hope of this project is that users will (a) find music that suits them in-the-moment, as our taste in music often depends on our current mood, (b) be exposed to new musicals, (c) participate in a contemplative exercise by assessing their current state, and (d) have one fewer decision to have to make during the day.
+
+
 ## Data Collection
 
 The data for the alpha version of this project was pulled from 3 sources:
@@ -63,14 +71,6 @@ First, I scraped [Ranker’s list of best musicals](https://www.ranker.com/crowd
 After pulling the list of musical names, I had to gather the data to analyze them. For the alpha version of this project, I chose to use only textual synopses as a basis for comparison with user input. In future versions, as described in [Future Developments](#Future-Developments), I hope to add song lyrics as well. When choosing what sources to use for these synopses, I was surprised to find that there wasn’t nearly as cohesive information about musicals online as there is for movies. This is perhaps given the relative popularity of either form of entertainment, along with the already technical/digital nature of movies versus musicals. In the end, I found [Wikipedia](wikipedia.com) and [All Musicals](allmusicals.com) to provide the best synopses.
 
 Of the 196 musicals scraped from [Ranker](ranker.com), only 2 did not have a synopsis on either [Wikipedia](wikipedia.com) or [All Musicals](allmusicals.com) (“Cyrano” and “Dancin’”). Of the remaining 194, 8 have only an [All Musicals](allmusicals.com) summary and 17 have only a [Wikipedia](wikipedia.com), leaving 169 musicals with two synopses to use for analysis. Synopsis lengths range from 37 words to 2715 words, with a median [Wikipedia](wikipedia.com) summary length of 1132 words and a median [All Musicals](allmusicals.com) summary length around half that, at 509 words.
-
-
-## Executive Summary
-First, I collected the Ranker.com list of the 196 most popular user-ranked musicals using Selenium and BeautifulSoup. Then, using the Requests library and the Wikipedia API, I collected the synopses for each musical from Wikipedia and All Musicals. Using the NLP library, spaCy, and regular expressions, I processed and vectorized the musical synopses. Using TextBlob, I then computed a sentiment rating for each musical synopsis.
-
-Through the Flask application, a user inputs a short description of their mood, answering the questions, “How are you feeling? What’s going on with you?”. Then, using spaCy, the cosine similarity between user input and each musical synopses is computed, and similarities are ranked. Of the top ten, they are ranked by magnitude of difference in sentiment ranking, and then the user is given the top three musicals from that list.
-
-The hope of this project is that users will (a) find music that suits them in-the-moment, as our taste in music often depends on our current mood, (b) be exposed to new musicals, (c) participate in a contemplative exercise by assessing their current state, and (d) have one fewer decision to have to make during the day.
 
 
 ## Data Processing
