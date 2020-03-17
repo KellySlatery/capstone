@@ -65,6 +65,14 @@ After pulling the list of musical names, I had to gather the data to analyze the
 Of the 196 musicals scraped from [Ranker](ranker.com), only 2 did not have a synopsis on either [Wikipedia](wikipedia.com) or [All Musicals](allmusicals.com) (“Cyrano” and “Dancin’”). Of the remaining 194, 8 have only an [All Musicals](allmusicals.com) summary and 17 have only a [Wikipedia](wikipedia.com), leaving 169 musicals with two synopses to use for analysis. Synopsis lengths range from 37 words to 2715 words, with a median [Wikipedia](wikipedia.com) summary length of 1132 words and a median [All Musicals](allmusicals.com) summary length around half that, at 509 words.
 
 
+## Executive Summary
+First, I collected the Ranker.com list of the 196 most popular user-ranked musicals using Selenium and BeautifulSoup. Then, using the Requests library and the Wikipedia API, I collected the synopses for each musical from Wikipedia and All Musicals. Using the NLP library, spaCy, and regular expressions, I processed and vectorized the musical synopses. Using TextBlob, I then computed a sentiment rating for each musical synopsis.
+
+Through the Flask application, a user inputs a short description of their mood, answering the questions, “How are you feeling? What’s going on with you?”. Then, using spaCy, the cosine similarity between user input and each musical synopses is computed, and similarities are ranked. Of the top ten, they are ranked by magnitude of difference in sentiment ranking, and then the user is given the top three musicals from that list.
+
+The hope of this project is that users will (a) find music that suits them in-the-moment, as our taste in music often depends on our current mood, (b) be exposed to new musicals, (c) participate in a contemplative exercise by assessing their current state, and (d) have one fewer decision to have to make during the day.
+
+
 ## Data Processing
 
 The data to be processed is all text, so a variety of NLP techniques were used to clean and preprocess the data for a variety of experimental analyses. NLP libraries used or considered for use include:
@@ -86,7 +94,7 @@ The name “en_core_web_lg” refers to the fact that this model is the large (l
 
 ### Data Cleaning Procedure
 
-Data cleaning methods were determined by the vectorizing methods’ input form as well as unique features of the English language and the structure of musical summaries. In future developments, these steps will take place after a model is trained on the text, as punctuation and capital letters are key in identifying word embeddings (relationships). First, using the Python [unicodedata (Unicode Database)](https://docs.python.org/2/library/unicodedata.html) module (a script that you can import into your notebook, included in the python package), I removed all diacritics by replacing them with [ASCII](https://en.wikipedia.org/wiki/ASCII) characters (Aa-Zz and 0-9). 
+Data cleaning methods were determined by the vectorizing methods’ input form as well as unique features of the English language and the structure of musical summaries. In future developments, these steps will take place after a model is trained on the text, as punctuation and capital letters are key in identifying word embeddings (relationships). First, using the Python [unicodedata (Unicode Database)](https://docs.python.org/2/library/unicodedata.html) module (a script that you can import into your notebook, included in the python package), I removed all diacritics by replacing them with [ASCII](https://en.wikipedia.org/wiki/ASCII) characters (Aa-Zz and 0-9).
 
 The next step was tokenizing (turning a string/text into a list of words/tokens) and removing stopwords. The [spaCy](https://spacy.io/usage/spacy-101) library provides a pre-defined list of stopwords containing the 326 most common words in the English language. To customize this list a bit, I found the top 25 most common words in the musical summaries and added words from that list which did not appear to provide helpful semantic meaning (‘act’, ‘people’, and ‘reprise’). After removing these stopwords, I also removed all numbers and used spaCy’s [Part-of-speech (POS) tagging function](https://spacy.io/api/annotation#pos-tagging) to remove all words that were not nouns (except pronouns), verbs, adjectives, or adverbs. This also got rid of all punctuation. [POS tags](https://spacy.io/api/annotation#pos-tagging) were derived from the spaCy model [en_core_web_lg](https://spacy.io/models/en#en_core_web_lg), described further below.
 
@@ -108,7 +116,7 @@ Though recommender systems are not able to be validated with an accuracy score l
 From the first few example user inputs, it does look like similar musicals are being recommended. As part of the next version of this project, I hope to implement both of these evaluation methods. More ideas are described in the [Future Developments](#Future-Developments) section below.
 
 
-# Computing Document Similarity
+## Document Similarity
 
 Document similarity describes the method used to compute how similar a user’s input (describing their mood) is to the synopses of different musicals, as represented by their vectors. In [spaCy](https://spacy.io/api/doc), a Doc vector is simply the average of the vectors of all the tokens in the document. All musicals are preprocessed as spaCy Doc objects, and the user’s input is processed first thing when it enters the python script (showmetunes.py).
 
@@ -119,14 +127,14 @@ But how is similarity between vectors computed? In spaCy, it’s a simple as typ
 Once document similarities were computed between user input and each musical summary, they were made into a pandas DataFrame and sorted by similarity score. Then, the 10 highest-scoring musicals were passed through to get their sentiment analysis scores.
 
 
-# Sentiment Analysis
+## Sentiment Analysis
 
-Sentiment Analysis at its core is the process of assigning a score [-1,1] to describe how positive or negative a document is. This is usually used for consumer reviews, but I thought it would be useful for this project as well. The primary reason I wanted to incorporate sentiment analysis into this recommender system is that similarity scoring is subjective. Two sentences with similar content and syntax may express opposite sentiments, for example: “I really love math” and “I really hate math”. 
+Sentiment Analysis at its core is the process of assigning a score [-1,1] to describe how positive or negative a document is. This is usually used for consumer reviews, but I thought it would be useful for this project as well. The primary reason I wanted to incorporate sentiment analysis into this recommender system is that similarity scoring is subjective. Two sentences with similar content and syntax may express opposite sentiments, for example: “I really love math” and “I really hate math”.
 
 For the purposes of this project, I used [TextBlob’s pretrained sentiment analysis model](https://textblob.readthedocs.io/en/dev/advanced_usage.html), based on the default PatternAnalyzer implementation, to get a rough sentiment rating for each document as well as the user input. According to [this source](https://www.quora.com/Sentiment-Analysis-How-does-CLiPS-Pattern-calculate-the-polarity-of-a-sentence-What-is-the-maths-involved-in-it), the model is quite simple: a database of adjectives/adverbs and their individual scores [-1,1] are stored [here](https://github.com/clips/pattern/blob/master/pattern/text/en/en-sentiment.xml). Then, when parsing a text, it will add up the scores of all occurring instances of words in the database, and take the average to represent the document. The average musical summary sentiment rating was 0.088 with a standard deviation of 0.066. Though most scores centered around 0, and this [TextBlob](https://textblob.readthedocs.io/en/dev/index.html) model is obviously not made for working with musical summaries, as a basis for future versions, I still included it in coming up with final recommendations.
 
 
-# Recommender System
+## Recommender System
 
 The final musical recommendations output to the user are the top three musicals ranked by magnitude of sentiment score difference from user input sentiment score of the top ten musicals ranked by similarity score.
 
@@ -137,11 +145,11 @@ Using [Flask](https://flask.palletsprojects.com/en/1.1.x/), I have created a loc
 ![](./assets/prompt_1_output.png)
 
 
-# Future Developments
+## Future Developments
 
 There are many parts of this project I would like to continue working on to improve it, make it more my own, and get it ready for deployment.
 
-First, I want to rank musicals myself. I plan to do this by using Wikipedia categories of musicals and then using the Spotify API to access track popularity. 
+First, I want to rank musicals myself. I plan to do this by using Wikipedia categories of musicals and then using the Spotify API to access track popularity.
 
 Next, I want to pull more data in the form of “synopses” to use as training data on the spaCy POS tagger and vectorization. I will start with the two sites I used for this iteration’s data ([Wikipedia](wikipedia.com) and [All Musicals](allmusicals.com)) and venture out to some more, like [TheatreMania](https://www.theatermania.com/). Further in the future, I would also like to incorporate lyrics as part of the similarity scoring process, and then perhaps features of the music itself.
 
@@ -151,6 +159,6 @@ Next, I want to create a user feedback system, where a user can rate the musical
 
 As for deployment, there are many steps to go about to get ready. On top of incorporating the evaluation techniques described earlier, I would also like to embed a feature that allow the user to input their Spotify login to directly export a playlist of those three musicals’ soundtracks for them to start listening to right away.
 
-# Final Conclusions and Summary
+## Final Conclusions and Summary
 
-While this is a fun project, it has also been quite a technical learning process. Using my machine, a user can input a short journal entry about their current state--mood, what’s on their mind--and my code will return three musical recommendations to match their mood. 
+While this is a fun project, it has also been quite a technical learning process. Using my machine, a user can input a short journal entry about their current state--mood, what’s on their mind--and my code will return three musical recommendations to match their mood.
