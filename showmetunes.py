@@ -11,7 +11,7 @@ import en_core_web_lg
 from textblob import TextBlob
 
 # Take in a string argument in ""
-user_input = sys.argv
+user_input = sys.argv[0]
 
 # Read in musical data and spaCy vectorization model for processing similarity
 df = pd.read_csv('./data/musical_for_app.csv')
@@ -84,8 +84,40 @@ def recommend(user_input):
     final_recommendations = get_recommendations(sentiment_list, user_input)
     return final_recommendations
 
+# Define a function to add the new input and recommendations to the above dataframe each time the recommender is run and count all occurrences of musicals
+def track_output(user_input, recommendations):
+
+    # Import csv to add to to track musical recommendations
+    output = pd.read_csv('./data/recommender_output.csv')
+
+    # Initialize a new row to track this round of recommendations
+    new_row = pd.DataFrame([[user_input, recommendations]], columns=['user_input', 'recommendations'])
+
+    # Track how many times a musical is recommended
+    output = pd.concat([output,new_row], axis=0, ignore_index=True)
+    for rec in recommendations:
+        for col in output.columns:
+            if rec == col:
+                output.loc[output['user_input'] == user_input, col] = 1
+
+    # Fill nulls (musicals not recommended) with 0s
+    output.fillna(0, inplace=True)
+
+    # Update the file with the new recommendations
+    output.to_csv('./data/recommender_output.csv', index=False)
+
+    return output
+
 if __name__ == '__main__':
-    user_input = sys.argv
-    df = pd.read_csv('./data/musical_for_app.csv')
-    nlp = en_core_web_lg.load()
-    print(recommend(sys.argv))
+    user_input = sys.argv[1]
+    # df = pd.read_csv('./data/musical_for_app.csv')
+    # nlp = en_core_web_lg.load()
+    recommendations = recommend(user_input)
+    print(recommendations)
+    track_output(user_input, recommendations)
+
+# if __name__ == '__main__':
+#     user_input = sys.argv
+#     df = pd.read_csv('./data/musical_for_app.csv')
+#     nlp = en_core_web_lg.load()
+#     print(recommend(sys.argv))

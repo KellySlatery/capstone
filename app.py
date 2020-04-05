@@ -26,8 +26,11 @@ def form():
 def form_submit():
     user_input = request.args
     # Get the musical recommendations given the user input
-    response = user_input['UserInput']
+    response = str(user_input['UserInput'])
     recs = showmetunes.recommend(response)
+    # Track the output
+    showmetunes.track_output(response, recs)
+    # Show on page
     return render_template('results.html', rec1=recs[0], rec2=recs[1], rec3=recs[2]) # Corresponds to template docs
 
 # Call app.run(debug=True) when python script is called
