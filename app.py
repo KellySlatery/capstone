@@ -1,5 +1,6 @@
+# Adapted from Riley's GA lesson: 12.02-lesson-flask-basics
+
 # imports
-import pickle
 import numpy as np
 import showmetunes
 from flask import Flask, request, render_template, jsonify, Response
