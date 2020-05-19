@@ -1,29 +1,31 @@
 # Adapted from Riley's GA lesson: 12.02-lesson-flask-basics
 
-# imports
+# Imports
 import numpy as np
 import showmetunes
 from flask import Flask, request, render_template, jsonify, Response
 
-# initialize the flask app
+# Initialize the flask app
 app = Flask('showMeTunes')
 
-# route 1: hello world # Using a decorator (@)
+# Initialize the first route (home page)
 @app.route('/')
-# return a simple string
+
+# Define what happens on that page: return a string
 def home():
     return 'All the musical recommendations you could ever want (or more)-- coming soon! :--)'
 
-# route 4: show a form to the user
+# Initialize the input page: from an html file that we'll display
 @app.route('/form')
-# use flask's render_template function to display an html page
+
+# Define what happens: show the html input form
 def form():
-    # We want to serve html as a file
     return render_template('form.html')
 
-# route 5: accept the form submission and do something fancy with it
-@app.route('/submit') # MUST BE /submit to match action attribute on the form!
-# load in the form data from the incoming request
+# Initialize the results page: what happens when the user inputs data
+@app.route('/submit')
+
+# Define what happens: load form data and return recommendations
 def form_submit():
     user_input = request.args
     # Get the musical recommendations given the user input
@@ -31,9 +33,9 @@ def form_submit():
     recs = showmetunes.recommend(response)
     # Track the output
     showmetunes.track_output(response, recs)
-    # Show on page
+    # Show html output on page
     return render_template('results.html', rec1=recs[0], rec2=recs[1], rec3=recs[2]) # Corresponds to template docs
 
-# Call app.run(debug=True) when python script is called
-if __name__ == '__main__': # python ./app_starter.py
+# Run when python script is called (debug=True)
+if __name__ == '__main__':
     app.run(debug=True)
